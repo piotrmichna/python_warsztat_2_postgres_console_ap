@@ -55,3 +55,8 @@ class Connection:
         cur = conn.cursor()
         cur.execute("CREATE DATABASE workshop;")
         conn.close()
+
+
+if __name__ == "__main__":
+    connect_db = Connection()
+    connect_db.connect()
