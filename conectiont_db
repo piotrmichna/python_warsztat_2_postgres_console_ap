@@ -40,3 +40,18 @@ class Connection:
                 else:
                     conn = None
         return conn
+
+    @classmethod
+    def _db_create_database(cls):
+        connection = cls.CONNECTION_DB['admin']
+        conn = psycopg2.connect(
+            user=connection['USERNAME'],
+            password=connection['PASSWORD'],
+            host=connection['HOST'],
+            port=connection['PORT'],
+            dbname=connection['DATABASE']
+        )
+        conn.autocommit = True
+        cur = conn.cursor()
+        cur.execute("CREATE DATABASE workshop;")
+        conn.close()
