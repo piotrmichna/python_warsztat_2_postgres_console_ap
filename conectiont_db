@@ -21,12 +21,22 @@ class Connection:
 
     @classmethod
     def connect(cls, connection=CONNECTION_DB['workshop']):
-        conn = psycopg2.connect(
-            user=connection['USERNAME'],
-            password=connection['PASSWORD'],
-            host=connection['HOST'],
-            port=connection['PORT'],
-            dbname=connection['DATABASE']
-        )
-        conn.autocommit = True
+        conn = False
+        while conn is False:
+            try:
+                conn = psycopg2.connect(
+                    user=connection['USERNAME'],
+                    password=connection['PASSWORD'],
+                    host=connection['HOST'],
+                    port=connection['PORT'],
+                    dbname=connection['DATABASE']
+                )
+                conn.autocommit = True
+            except psycopg2.OperationalError as error:
+                print(f'Płąd połączenia:', error)
+                if str(error).split(" ")[2] == 'database':
+                    print(f"Tworzenie bazy danych {connection['DATABASE']}")
+                    conn = None
+                else:
+                    conn = None
         return conn
