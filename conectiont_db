@@ -1,3 +1,6 @@
+import psycopg2
+
+
 class Connection:
     CONNECTION_DB = {
         'workshop': {
@@ -15,3 +18,15 @@ class Connection:
             'DATABASE': 'postgres'
         }
     }
+
+    @classmethod
+    def connect(cls, connection=CONNECTION_DB['workshop']):
+        conn = psycopg2.connect(
+            user=connection['USERNAME'],
+            password=connection['PASSWORD'],
+            host=connection['HOST'],
+            port=connection['PORT'],
+            dbname=connection['DATABASE']
+        )
+        conn.autocommit = True
+        return conn
