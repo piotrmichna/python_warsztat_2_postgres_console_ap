@@ -1,0 +1,17 @@
+class Connection:
+    CONNECTION_DB = {
+        'workshop': {
+            'HOST': 'localhost',
+            'PORT': '5432',
+            'USERNAME': 'postgres',
+            'PASSWORD': 'coderslab',
+            'DATABASE': 'workshop'
+        },
+        'admin': {
+            'HOST': 'localhost',
+            'PORT': '5432',
+            'USERNAME': 'postgres',
+            'PASSWORD': 'coderslab',
+            'DATABASE': 'postgres'
+        }
+    }
