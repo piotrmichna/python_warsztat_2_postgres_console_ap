@@ -33,6 +33,7 @@ class DbColumn(conection_db.Connection):
         else:
             return ""
 
+
 class DbTable(DbColumn):
     def __init__(self, name):
         self.name = name
@@ -58,20 +59,22 @@ class DbTable(DbColumn):
             return False
 
     def crate_table(self):
-        conn = super().connect()
-        if conn is not None:
-            cur = conn.cursor()
-            try:
-                cur.execute(self.get_table())
-                print(f"Utworzono table {self.name}")
-            except Exception as e:
-                print(f"Tabla o nazwie: {self.name} już istnieje.")
-            conn.close()
+        query = self.get_table()
+        if query:
+            conn = super().connect()
+            if conn is not None:
+                cur = conn.cursor()
+                try:
+                    cur.execute(query)
+                    print(f"Utworzono table {self.name}")
+                except Exception as e:
+                    print(f"Tabla o nazwie: {self.name} już istnieje.")
+                conn.close()
 
 
 if __name__ == "__main__":
     user_id = DbColumn('id', 'serial', 'primary key')
-    user_table=DbTable('user_table')
+    user_table = DbTable('user_table')
     user_table.column_add('id', 'serial', 'primary key')
     user_table.column_add('name', 'varchar', '(50) UNIQUE')
     print(user_id.get_column())
