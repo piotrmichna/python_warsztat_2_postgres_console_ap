@@ -38,6 +38,12 @@ class DbTable(DbColumn):
         self.name = name
         self.tab_col = []
 
+    def column_add(self, name, col_type, col_param=None):
+        if super().is_column(col_type):
+            self.tab_col.append(DbColumn(name, col_type, col_param))
+        else:
+            print(f'  > column_add > Nieprawidłowy typ kolumny: {col_type}')
+
 
 
 if __name__ == "__main__":
