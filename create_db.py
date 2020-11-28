@@ -59,6 +59,9 @@ class DbTable(DbColumn):
         else:
             return False
 
+    def is_table_created(self):
+        return self.created
+
     def crate_table(self):
         if self.created is not True:
             query = self.get_table_sql()
@@ -73,8 +76,6 @@ class DbTable(DbColumn):
                         print(f"Tabla o nazwie: {self.name} już istnieje.")
                     self.created = True
                     super().disconnect(conn)
-                
-
 
 
 def db_create_user():
