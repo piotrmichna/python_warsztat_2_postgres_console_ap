@@ -59,7 +59,7 @@ class DbTable(DbColumn):
             return False
 
     def crate_table(self):
-        query = self.get_table()
+        query = self.get_table_sql()
         if query:
             conn = super().connect()
             if conn is not None:
