@@ -57,6 +57,17 @@ class DbTable(DbColumn):
         else:
             return False
 
+    def crate_table(self):
+        conn = super().connect()
+        if conn is not None:
+            cur = conn.cursor()
+            try:
+                cur.execute(self.get_table())
+                print(f"Utworzono table {self.name}")
+            except Exception as e:
+                print(f"Tabla o nazwie: {self.name} już istnieje.")
+            conn.close()
+
 
 if __name__ == "__main__":
     user_id = DbColumn('id', 'serial', 'primary key')
