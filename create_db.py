@@ -20,3 +20,12 @@ class DbColumn(conection_db.Connection):
             self.col['name'] = name
             self.col['type'] = typ
             self.col['param'] = param
+
+    def get_column(self):
+        if len(self.col) > 0:
+            result = str(f"{self.col['name']} {self.col['type']}")
+            if self.col['param']:
+                result += str(f" {self.col['param']}")
+            return result
+        else:
+            return ""
