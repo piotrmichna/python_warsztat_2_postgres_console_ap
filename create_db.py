@@ -13,3 +13,9 @@ class DbColumn(conection_db.Connection):
             return True
         else:
             return False
+
+    def add_column(self, name, typ, param=None):
+        if self.is_column(typ):
+            self.col['name'] = name
+            self.col['type'] = typ
+            self.col['param'] = param
