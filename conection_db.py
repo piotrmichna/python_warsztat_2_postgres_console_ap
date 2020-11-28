@@ -42,7 +42,7 @@ class Connection:
         return conn
 
     @classmethod
-    def disconnect(cls,cur):
+    def disconnect(cls, cur):
         if cur:
             cur.close()
 
