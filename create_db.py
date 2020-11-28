@@ -80,3 +80,12 @@ def db_create_user():
     user_table.crate_table()
     return user_table
 
+def db_create_messages():
+    messages_table = DbTable('messages')
+    messages_table.column_add('id', 'serial', 'primary key')
+    messages_table.column_add('from_id', 'integer', 'REFERENCES users(id) ON DELETE CASCADE')
+    messages_table.column_add('to_id', 'integer', 'REFERENCES users(id) ON DELETE CASCADE')
+    messages_table.column_add('text', 'varchar', '(250)')
+    messages_table.column_add('creation_date', 'timestamp', 'DEFAULT CURRENT_TIMESTAMP')
+    messages_table.crate_table()
+    return messages_table
