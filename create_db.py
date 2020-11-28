@@ -44,6 +44,19 @@ class DbTable(DbColumn):
         else:
             print(f'  > column_add > Nieprawidłowy typ kolumny: {col_type}')
 
+    def get_table_sql(self):
+        if len(self.tab_col) > 0:
+            str_table = f"CREATE TABLE {self.name}(\n"
+            n = 0
+            for col in self.tab_col:
+                str_table += col.get_column()
+                n += 1
+                if n < len(self.tab_col):
+                    str_table += ',\n'
+            return str_table + ')'
+        else:
+            return False
+
 
 
 if __name__ == "__main__":
