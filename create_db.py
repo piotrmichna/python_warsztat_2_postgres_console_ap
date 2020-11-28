@@ -58,7 +58,11 @@ class DbTable(DbColumn):
             return False
 
 
-
 if __name__ == "__main__":
     user_id = DbColumn('id', 'serial', 'primary key')
+    user_table=DbTable('user_table')
+    user_table.column_add('id', 'serial', 'primary key')
+    user_table.column_add('name', 'varchar', '(50) UNIQUE')
     print(user_id.get_column())
+    print('--DbTable--')
+    print(print(user_table.get_table_sql()))
