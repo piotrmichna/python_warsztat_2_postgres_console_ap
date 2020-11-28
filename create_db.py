@@ -21,6 +21,8 @@ class DbColumn(conection_db.Connection):
             self.col['name'] = name
             self.col['type'] = typ
             self.col['param'] = param
+        else:
+            raise ValueError("Parametry kolumny nie prawidłowe!")
 
     def get_column(self):
         if len(self.col) > 0:
@@ -33,5 +35,5 @@ class DbColumn(conection_db.Connection):
 
 
 if __name__ == "__main__":
-    user_id = DbColumn('id', 'serial', 'primary key')
+    user_id = DbColumn('id', 'serial2', 'primary key')
     print(user_id.get_column())
