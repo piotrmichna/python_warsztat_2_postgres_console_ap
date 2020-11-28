@@ -33,7 +33,13 @@ class DbColumn(conection_db.Connection):
         else:
             return ""
 
+class DbTable(DbColumn):
+    def __init__(self, name):
+        self.name = name
+        self.tab_col = []
+
+
 
 if __name__ == "__main__":
-    user_id = DbColumn('id', 'serial2', 'primary key')
+    user_id = DbColumn('id', 'serial', 'primary key')
     print(user_id.get_column())
