@@ -42,6 +42,11 @@ class Connection:
         return conn
 
     @classmethod
+    def disconnect(cls,cur):
+        if cur:
+            cur.close()
+
+    @classmethod
     def _db_create(cls, db_name):
         connection = cls.CONNECTION_DB['admin']
         conn = psycopg2.connect(
