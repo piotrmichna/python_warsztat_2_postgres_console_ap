@@ -3,6 +3,7 @@ import conection_db
 
 class DbColumn(conection_db.Connection):
     COL_TYPE = ['serial', 'integer', 'varchar', 'timestamp']
+
     # COLTYPE_PARAM_DICT={}
 
     def __init__(self, name, col_type, col_param=None):
@@ -29,3 +30,8 @@ class DbColumn(conection_db.Connection):
             return result
         else:
             return ""
+
+
+if __name__ == "__main__":
+    user_id = DbColumn('id', 'serial', 'primary key')
+    print(user_id.get_column())
