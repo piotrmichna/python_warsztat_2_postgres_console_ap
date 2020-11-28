@@ -38,6 +38,7 @@ class DbTable(DbColumn):
     def __init__(self, name):
         self.name = name
         self.tab_col = []
+        self.created = False
 
     def column_add(self, name, col_type, col_param=None):
         if super().is_column(col_type):
@@ -59,17 +60,21 @@ class DbTable(DbColumn):
             return False
 
     def crate_table(self):
-        query = self.get_table_sql()
-        if query:
-            conn = super().connect()
-            if conn is not None:
-                cur = conn.cursor()
-                try:
-                    cur.execute(query)
-                    print(f"Utworzono table {self.name}")
-                except Exception as e:
-                    print(f"Tabla o nazwie: {self.name} już istnieje.")
-            super().disconnect(conn)
+        if self.created is not True:
+            query = self.get_table_sql()
+            if query:
+                conn = super().connect()
+                if conn is not None:
+                    cur = conn.cursor()
+                    try:
+                        cur.execute(query)
+                        print(f"Utworzono table {self.name}")
+                    except Exception as e:
+                        print(f"Tabla o nazwie: {self.name} już istnieje.")
+                    self.created = True
+                    super().disconnect(conn)
+                
+
 
 
 def db_create_user():
@@ -79,6 +84,7 @@ def db_create_user():
     user_table.column_add('hashed_password', 'varchar', '(80)')
     user_table.crate_table()
     return user_table
+
 
 def db_create_messages():
     messages_table = DbTable('messages')
