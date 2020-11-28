@@ -77,3 +77,4 @@ if __name__ == "__main__":
     print(user_id.get_column())
     print('--DbTable--')
     print(print(user_table.get_table_sql()))
+    user_table.crate_table()
