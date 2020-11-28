@@ -69,15 +69,14 @@ class DbTable(DbColumn):
                     print(f"Utworzono table {self.name}")
                 except Exception as e:
                     print(f"Tabla o nazwie: {self.name} już istnieje.")
-                conn.close()
+            super().disconnect(conn)
 
 
-if __name__ == "__main__":
-    user_id = DbColumn('id', 'serial', 'primary key')
-    user_table = DbTable('user_table')
+def db_create_user():
+    user_table = DbTable('users')
     user_table.column_add('id', 'serial', 'primary key')
-    user_table.column_add('name', 'varchar', '(50) UNIQUE')
-    print(user_id.get_column())
-    print('--DbTable--')
-    print(print(user_table.get_table_sql()))
+    user_table.column_add('username', 'varchar', '(255) UNIQUE')
+    user_table.column_add('hashed_password', 'varchar', '(80)')
     user_table.crate_table()
+    return user_table
+
